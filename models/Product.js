@@ -1,4 +1,4 @@
-import mongoose from "mongodb"
+import mongoose from "mongoose"
 
 const ProductSchema = new mongoose.Schema({
     title: {
@@ -28,4 +28,4 @@ const ProductSchema = new mongoose.Schema({
 }
 );
 
-export default mongoose.MongoCredentials.Product || mongoose.model("Product", ProductSchema)
+export default mongoose.models.Product || mongoose.model("Product", ProductSchema)
