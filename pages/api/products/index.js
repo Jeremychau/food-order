@@ -2,19 +2,20 @@ import dbConnect from "../../../utill/mongo";
 import Product from "../../../models/Product";
 
 export default async function handler(req, res) {
-  const {mothod} = req;
+  const {method} = req;
 
     dbConnect()
 
-    switch (req) {
+    switch (method) {
         case 'GET':
-
+            const products = await Product.find();
+            res.status(200).json(products)
             break;
         case 'POST':
             try {
                 const product = await Product.create(req.body);
                 res.status(201).json(product)
-            } catch (error) {
+            } catch (err) {
                 res.status(500).json(err)
             }
             break;
