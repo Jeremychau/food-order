@@ -1,8 +1,9 @@
+import axios from 'axios';
 import Image from 'next/image';
 import React from 'react';
 import styles from '../../styles/Order.module.css';
 
-const Order = () => {
+const Order = ({order}) => {
 
     const statusList = [
         {
@@ -23,7 +24,7 @@ const Order = () => {
         },
     ]
 
-    const status = 0;
+    const status = order.status;
 
     const statusClass = (index) => {
         if( index-status < 1) return styles.done
@@ -36,38 +37,40 @@ const Order = () => {
         <div className={styles.left}>
             <div className={styles.row}>
                 <table className={styles.table}>
-                    <tr className={styles.trTitle}>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Addrees</th>
-                        <th>Total</th>
-                    </tr>
-                    <tr className={styles.tr}>
-                        <td>
-                            <span className={styles.id}>123</span>
-                        </td>
-                        <td>
-                            <span className={styles.name}>
-                                Double ingredient, spicy sauce
-                            </span>
-                        </td>
-                        <td>
-                            <span className={styles.address}>
-                                dasdajksa tko
-                            </span>
-                        </td>
-                        <td>
-                            <span className={styles.total}>
-                                $39.80
-                            </span>
-                        </td>
-                    </tr>
+                        <tbody>
+                        <tr className={styles.trTitle}>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Addrees</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr className={styles.tr}>
+                            <td>
+                                <span className={styles.id}>{order._id}</span>
+                            </td>
+                            <td>
+                                <span className={styles.name}>
+                                    {order.customer}
+                                </span>
+                            </td>
+                            <td>
+                                <span className={styles.address}>
+                                    {order.address}
+                                </span>
+                            </td>
+                            <td>
+                                <span className={styles.total}>
+                                    $ {order.total}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div className={styles.row}>
                 {
                     statusList.map( (item, index) => (
-                        <div className={statusClass(index)}>
+                        <div className={statusClass(index)} key={index}>
                             <Image src={item.img} width={30} height={30} alt="" />
                             <span>{item.lable}</span>
                             <div className={styles.checkedIcon}>
@@ -96,5 +99,10 @@ const Order = () => {
       </div>
   );
 };
+
+export const getServerSideProps = async( {params} ) => {
+    const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`)
+    return {props: {order: res.data}}
+}
 
 export default Order;

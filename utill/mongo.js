@@ -26,7 +26,7 @@ async function dbConnect() {
 
   if (!cached.promise) {
     const opts = {
-      bufferCommands: false,
+      bufferCommands: false
     }
 
     cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {

@@ -1,4 +1,4 @@
-import mongoose from "mongodb"
+import mongoose from "mongoose"
 
 const OrderSchema = new mongoose.Schema(
     {
@@ -30,4 +30,4 @@ const OrderSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.models.Product || mongoose.model("Product", OrderSchema)
+export default mongoose.models.Order || mongoose.model("Order", OrderSchema)

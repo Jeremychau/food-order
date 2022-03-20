@@ -1,3 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
+    images: {
+        domains: ['static.toiimg.com']
+    }
 }
