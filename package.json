@@ -10,7 +10,7 @@
   "dependencies": {
     "@paypal/react-paypal-js": "^7.6.0",
     "@reduxjs/toolkit": "^1.7.2",
-    "axios": "^0.26.0",
+    "axios": "^1.6.0",
     "cookie": "^0.4.2",
     "mongodb": "^4.3.1",
     "mongoose": "^6.1.8",
